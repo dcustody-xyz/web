@@ -1,0 +1,39 @@
+{
+  "name": "dcustody",
+  "version": "0.1.0",
+  "private": true,
+  "description": "dCustody web site",
+  "author": "dCustody",
+  "keywords": [
+    "dCustody"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx --fix ./src",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/roboto-mono": "^4.5.10",
+    "bulma": "^0.9.4",
+    "gatsby": "^5.8.1",
+    "gatsby-plugin-manifest": "^5.8.0",
+    "gatsby-plugin-sass": "^6.8.0",
+    "gatsby-plugin-sitemap": "^6.8.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-simple-typewriter": "^5.0.1",
+    "sass": "^1.60.0",
+    "swiper": "^9.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@types/react": "^18.0.31",
+    "@types/react-dom": "^18.0.11",
+    "eslint-config-react-app": "^7.0.1",
+    "typescript": "^5.0.3"
+  }
+}
