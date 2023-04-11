@@ -8,7 +8,7 @@ import Layout from '../components/Layout'
 
 const baseTexts = [
   {
-    text: '- Tokyo-based Mt. Gox filed for bankruptcy after some 850,000 BTC went missing | Feb, 2014',
+    text: '> Tokyo-based Mt. Gox filed for bankruptcy after some 850,000 BTC went missing - Feb, 2014',
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
@@ -19,7 +19,7 @@ const baseTexts = [
     )
   },
   {
-    text: '- 76,000 investors collectively lost at least $124M with Quadriga Crypto Exchange fraud | Jan, 2019',
+    text: '> 76,000 investors collectively lost at least $124M with Quadriga Crypto Exchange fraud - Jan, 2019',
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
@@ -30,7 +30,7 @@ const baseTexts = [
     )
   },
   {
-    text: '- Stakehound Accuses Fireblocks of Losing $74M of ETH | Jun, 2021',
+    text: '> Stakehound Accuses Fireblocks of Losing $74M of ETH - Jun, 2021',
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
@@ -41,7 +41,7 @@ const baseTexts = [
     )
   },
   {
-    text: '- FTX reports $8bn "lost" in customers funds | Nov, 2022',
+    text: '> FTX reports $8bn "lost" in customers funds - Nov, 2022',
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
@@ -55,7 +55,7 @@ const baseTexts = [
     text: 'Want to stop this?',
     wrapper: (text: string) => (
       <div className="mt-5 pt-5">
-        <div className="has-text-centered is-size-4 mt-5">
+        <div className="has-text-centered is-size-4-desktop is-size-5-tablet is-size-6-mobile mt-5">
           <span className="has-text-weight-light">{text}</span>
           <Cursor cursorStyle="_" />
         </div>
@@ -67,26 +67,20 @@ const baseTexts = [
 const Typed: React.FC<{
   words:   string[],
   wrapper: (text: string) => JSX.Element
-}> = ({words, wrapper}) => {
-  return (
-    wrapper(words.join(''))
-  )
-}
+}> = ({words, wrapper}) => wrapper(words.join(''))
 
 const Typewriter: React.FC<{
-  words:   string[],
-  wrapper: (text: string) => JSX.Element,
+  words:         string[],
+  wrapper:       (text: string) => JSX.Element,
   completedText: (text: string) => void
 }> = ({words, wrapper, completedText}) => {
   const [text] = useTypewriter({
-    words: words,
-    loop: 1,
-    typeSpeed: 50,
+    words:       words,
+    loop:        1,
+    typeSpeed:   50,
     deleteSpeed: 0,
-    onLoopDone: () => {
-      setTimeout(() => {
-        completedText({text, wrapper})
-      }, 2000)
+    onLoopDone:  () => {
+      setTimeout(() => completedText({text, wrapper}), 2000)
     }
   })
 
