@@ -3,3 +3,38 @@
 $family-monospace: "Roboto Mono", monospace;
 
 @import "~bulma/bulma.sass";
+
+.arrow-down {
+  @include arrow($info);
+}
+
+.swiper-slide-active {
+  .has-appear-effect {
+    opacity: 0;
+    animation: appear 1s ease-in-out forwards;
+  }
+}
+
+.it-moves-up-and-down {
+  animation: appear 1s ease-in-out forwards,
+             up-and-down 1s ease-in-out infinite;
+}
+
+@keyframes up-and-down {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

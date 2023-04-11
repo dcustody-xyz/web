@@ -8,7 +8,7 @@ import '../styles/app.scss'
 
 const Layout: React.FC<PageProps> = ({ children }) => (
   <React.Fragment>
-    <div className="container has-background-dark has-text-light">
+    <div className="container has-background-dark has-text-light has-appear-effect mx-3">
       {children}
     </div>
   </React.Fragment>

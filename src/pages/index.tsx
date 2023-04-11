@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import type { HeadFC, PageProps } from 'gatsby'
 import { useTypewriter, Cursor } from 'react-simple-typewriter'
-import { Navigation, Scrollbar } from 'swiper'
+import { Mousewheel, Virtual } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 import Layout from '../components/Layout'
 
 import 'swiper/scss'
-import 'swiper/scss/navigation'
+import 'swiper/scss/virtual'
 
 const baseTexts = [
   {
@@ -45,33 +47,6 @@ const baseTexts = [
           <span className="has-text-weight-light">{text}</span>
           {cursor && <Cursor />}
         </div>
-      </div>
-    )
-  },
-  {
-    text: 'Custody is broken by design!',
-    wrapper: (text: string, cursor: boolean) => (
-      <div className="mt-3 is-size-6 has-text-centered is-family-sans-serif">
-        <span className="has-text-weight-light">{text}</span>
-        {cursor && <Cursor />}
-      </div>
-    )
-  },
-  {
-    text: '"Benefits are lost if a trusted third party is still required" - Satoshi Nakamoto',
-    wrapper: (text: string, cursor: boolean) => (
-      <div className="mt-5 ml-3 is-size-6 has-text-centered-desktop is-family-sans-serif">
-        <span className="has-text-weight-light">{text}</span>
-        {cursor && <Cursor />}
-      </div>
-    )
-  },
-  {
-    text: 'Join us to change reality!',
-    wrapper: (text: string, cursor: boolean) => (
-      <div className="mt-5 ml-3 is-size-2 has-text-centered-desktop is-family-sans-serif">
-        <span className="has-text-weight-light">{text}</span>
-        {cursor && <Cursor />}
       </div>
     )
   }
@@ -119,35 +94,88 @@ const IndexPage: React.FC<PageProps> = () => {
 
   if (! currentText) {
     setTimeout(() => {
-      swiper?.changeDirection('vertical')
+      // swiper?.changeDirection('vertical')
       swiper?.updateSize()
-      // swiper?.enable()
+      swiper?.enable()
     }, 100)
   }
 
   return (
-    <Swiper spaceBetween={50}
-            modules={[Navigation, Scrollbar]}
-            navigation
-            scrollbar={{ draggable: true }}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => { swiper.disable(); setSwiper(swiper) }} >
-      <SwiperSlide>
-        <Layout>
-          <div className="has-text-success is-family-monospace is-size-5 p-2">
-            {completedTexts.map((text, index) => (
-              <Typed key={index} words={[text.text]} wrapper={text.wrapper} />
-            ))}
-            {currentText && (
-              <Typewriter key={completedTexts.length}
-                          words={[currentText.text]}
-                          wrapper={currentText.wrapper}
-                          completedText={completedText} />
+    <React.Fragment>
+      <Swiper spaceBetween={50}
+              modules={[Mousewheel, Virtual]}
+              className={'h-screen'}
+              direction={'vertical'}
+              slidesPerView={1}
+              mousewheel={true}
+              history={{key: 'slide'}}
+              virtual={true}
+              enabled={false}
+              grabCursor={true}
+              onSlideChange={() => console.log('slide change')}
+              onSwiper={swiper => { setSwiper(swiper) }} >
+        <SwiperSlide data-history="main" virtualIndex={0}>
+          <Layout>
+            <div className="has-text-success is-family-monospace is-size-5 p-2">
+              {completedTexts.map((text, index) => (
+                <Typed key={index} words={[text.text]} wrapper={text.wrapper} />
+              ))}
+              {currentText && (
+                <Typewriter key={completedTexts.length}
+                            words={[currentText.text]}
+                            wrapper={currentText.wrapper}
+                            completedText={completedText} />
+              )}
+            </div>
+            {! currentText && (
+              <div className="has-text-centered mt-5 pt-5">
+                <div className="it-moves-up-and-down mt-5 pt-5">
+                  <button className="button is-success is-rounded is-large is-outlined py-0" onClick={() => swiper?.slideNext()}>
+                    <span className="arrow-down"></span>
+                  </button>
+                </div>
+              </div>
             )}
-          </div>
-        </Layout>
-      </SwiperSlide>
-    </Swiper>
+          </Layout>
+        </SwiperSlide>
+          <SwiperSlide data-history="conclusion" virtualIndex={1}>
+              <Layout>
+                {! currentText && (
+                  <div className="has-text-success mt-5 pt-5">
+                    <div className="mt-3 is-size-2 has-text-centered is-family-sans-serif">
+                      <span className="has-text-weight-light">
+                        Custody is broken by design!
+                      </span>
+                    </div>
+
+                    <div className="mt-5 ml-3 is-size-6 has-text-centered is-family-sans-serif">
+                      <span className="has-text-weight-light">
+                        "Benefits are lost if a trusted third party is still required" - Satoshi Nakamoto
+                      </span>
+                    </div>
+
+                    <div className="columns is-mobile is-centered mt-5 pt-5">
+                      <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+                        <form className="mt-5 pt-5 has-text-centered">
+                          <div className="control has-icons-left has-icons-right">
+                            <input className="input" type="email" placeholder="Email" autoFocus />
+                            <span className="icon is-small is-left">
+                              <FontAwesomeIcon icon={faEnvelope} />
+                            </span>
+                          </div>
+
+                          <div className="control mt-5">
+                            <button className="button is-primary">Join the wait list!</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </Layout>
+          </SwiperSlide>
+      </Swiper>
+    </React.Fragment>
   )
 }
 
