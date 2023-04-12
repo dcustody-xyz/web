@@ -12,7 +12,7 @@ const baseTexts = [
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
-        <span className={cursor || 'has-text-dark'}>
+        <span className={cursor || 'has-text-black'}>
           <Cursor cursorStyle="_" />
         </span>
       </div>
@@ -23,7 +23,7 @@ const baseTexts = [
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
-        <span className={cursor || 'has-text-dark'}>
+        <span className={cursor || 'has-text-black'}>
           <Cursor cursorStyle="_" />
         </span>
       </div>
@@ -34,7 +34,7 @@ const baseTexts = [
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
-        <span className={cursor || 'has-text-dark'}>
+        <span className={cursor || 'has-text-black'}>
           <Cursor cursorStyle="_" />
         </span>
       </div>
@@ -45,7 +45,7 @@ const baseTexts = [
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
-        <span className={cursor || 'has-text-dark'}>
+        <span className={cursor || 'has-text-black'}>
           <Cursor cursorStyle="_" />
         </span>
       </div>
@@ -54,10 +54,12 @@ const baseTexts = [
   {
     text: 'Want to stop this?',
     wrapper: (text: string) => (
-      <div className="mt-5 pt-5">
-        <div className="has-text-centered is-size-4-desktop is-size-5-tablet is-size-6-mobile mt-5">
-          <span className="has-text-weight-light">{text}</span>
-          <Cursor cursorStyle="_" />
+      <div className="columns is-mobile is-centered mt-5 pt-5">
+        <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+          <div className="is-size-5-desktop is-size-5-tablet is-size-6-mobile mt-5">
+            <span className="has-text-weight-light">{text}</span>
+            <Cursor cursorStyle="_" />
+          </div>
         </div>
       </div>
     )
@@ -67,7 +69,7 @@ const baseTexts = [
 const Typed: React.FC<{
   words:   string[],
   wrapper: (text: string) => JSX.Element
-}> = ({words, wrapper}) => wrapper(words.join(''))
+}> = ({ words, wrapper }) => wrapper(words.join(''))
 
 const Typewriter: React.FC<{
   words:         string[],
@@ -124,7 +126,7 @@ const IndexPage: React.FC<PageProps> = () => {
                   </div>
 
                   <div className="control my-5">
-                    <button className="button is-primary">Join the wait list!</button>
+                    <button className="button is-primary">Join us!</button>
                   </div>
                 </form>
               </div>
@@ -140,7 +142,7 @@ export default IndexPage
 
 export const Head: HeadFC = () => (
   <React.Fragment>
-    <html lang="en" className="has-background-dark" />
+    <html lang="en" className="has-background-black has-text-light" />
     <title>dCustody</title>
   </React.Fragment>
 )

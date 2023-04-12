@@ -8,7 +8,7 @@ import '../styles/app.scss'
 
 const Layout: React.FC<PageProps> = ({ children }) => (
   <React.Fragment>
-    <div className="container has-background-dark has-text-light has-appear-effect is-family-monospace mx-3">
+    <div className="container has-appear-effect is-family-monospace mx-3">
       <div className="columns">"
         <div className="column is-10-desktop is-offset-1-desktop is-12-tablet">
           {children}
