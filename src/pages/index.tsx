@@ -8,7 +8,8 @@ import Layout from '../components/Layout'
 
 const baseTexts = [
   {
-    text: '> Tokyo-based Mt. Gox filed for bankruptcy after some 850,000 BTC went missing - Feb, 2014',
+    text:    '> Tokyo-based Mt. Gox filed for bankruptcy after some 850,000 BTC went missing - Feb, 2014',
+    timeout: 2000,
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
@@ -19,7 +20,8 @@ const baseTexts = [
     )
   },
   {
-    text: '> 76,000 investors collectively lost at least $124M with Quadriga Crypto Exchange fraud - Jan, 2019',
+    text:    '> 76,000 investors collectively lost at least $124M with Quadriga Crypto Exchange fraud - Jan, 2019',
+    timeout: 2000,
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
@@ -30,7 +32,8 @@ const baseTexts = [
     )
   },
   {
-    text: '> Stakehound Accuses Fireblocks of Losing $74M of ETH - Jun, 2021',
+    text:    '> Stakehound Accuses Fireblocks of Losing $74M of ETH - Jun, 2021',
+    timeout: 2000,
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
@@ -41,7 +44,8 @@ const baseTexts = [
     )
   },
   {
-    text: '> FTX reports $8bn "lost" in customers funds - Nov, 2022',
+    text:    '> FTX reports $8bn "lost" in customers funds - Nov, 2022',
+    timeout: 2000,
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
@@ -52,7 +56,8 @@ const baseTexts = [
     )
   },
   {
-    text: 'Want to stop this?',
+    text:    'Want to stop this?',
+    timeout: 500,
     wrapper: (text: string) => (
       <div className="columns is-mobile is-centered mt-5 pt-5">
         <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-third-fullhd">
@@ -73,16 +78,17 @@ const Typed: React.FC<{
 
 const Typewriter: React.FC<{
   words:         string[],
+  timeout:       number,
   wrapper:       (text: string) => JSX.Element,
   completedText: (text: string) => void
-}> = ({words, wrapper, completedText}) => {
+}> = ({words, timeout, wrapper, completedText}) => {
   const [text] = useTypewriter({
     words:       words,
     loop:        1,
-    typeSpeed:   50,
+    typeSpeed:   20,
     deleteSpeed: 0,
     onLoopDone:  () => {
-      setTimeout(() => completedText({text, wrapper}), 2000)
+      setTimeout(() => completedText({text, wrapper, timeout}), timeout)
     }
   })
 
@@ -162,6 +168,7 @@ const JoinForm: React.FC = () => {
               <Typewriter key={message}
                           words={[message]}
                           wrapper={text => <div className="mt-5 ml-3">{text}</div>}
+                          timeout={0}
                           completedText={() => {}} />
             </div>
           )}
@@ -189,6 +196,7 @@ const IndexPage: React.FC<PageProps> = () => {
             <Typewriter key={completedTexts.length}
                         words={[currentText.text]}
                         wrapper={currentText.wrapper}
+                        timeout={currentText.timeout}
                         completedText={completedText} />
           )}
         </div>
