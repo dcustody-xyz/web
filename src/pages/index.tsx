@@ -12,7 +12,7 @@ const baseTexts = [
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
-        <span className={cursor || 'has-text-black'}>
+        <span className={cursor ? '' : 'has-text-black'}>
           <Cursor cursorStyle="_" />
         </span>
       </div>
@@ -23,7 +23,7 @@ const baseTexts = [
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
-        <span className={cursor || 'has-text-black'}>
+        <span className={cursor ? '' : 'has-text-black'}>
           <Cursor cursorStyle="_" />
         </span>
       </div>
@@ -34,7 +34,7 @@ const baseTexts = [
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
-        <span className={cursor || 'has-text-black'}>
+        <span className={cursor ? '' : 'has-text-black'}>
           <Cursor cursorStyle="_" />
         </span>
       </div>
@@ -45,7 +45,7 @@ const baseTexts = [
     wrapper: (text: string, cursor: boolean) => (
       <div className="mt-5 ml-3">
         <span className="has-text-weight-light">{text}</span>
-        <span className={cursor || 'has-text-black'}>
+        <span className={cursor ? '' : 'has-text-black'}>
           <Cursor cursorStyle="_" />
         </span>
       </div>
@@ -55,7 +55,7 @@ const baseTexts = [
     text: 'Want to stop this?',
     wrapper: (text: string) => (
       <div className="columns is-mobile is-centered mt-5 pt-5">
-        <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+        <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-third-fullhd">
           <div className="is-size-5-desktop is-size-5-tablet is-size-6-mobile mt-5">
             <span className="has-text-weight-light">{text}</span>
             <Cursor cursorStyle="_" />
@@ -93,6 +93,85 @@ const Typewriter: React.FC<{
   )
 }
 
+const JoinForm: React.FC = () => {
+  const apiEndpoint = 'https://email-api.dcustody.xyz/save'
+
+  const [ email, setEmail ]               = useState<string>('')
+  const [ message, setMessage ]           = useState<string>('')
+  const [ submitStatus, setSubmitStatus ] = useState<'idle' | 'submitting' | 'submitted'>('idle')
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    setSubmitStatus('submitting')
+
+    const response = await fetch(apiEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email })
+    })
+
+    if (response.ok) {
+      setMessage('You are in, thanks!')
+      setEmail('')
+      setSubmitStatus('submitted')
+    } else if (response.status === 400 || response.status === 409) {
+      const { message } = await response.json()
+
+      setMessage(message)
+      setEmail('')
+      setSubmitStatus(response.status === 400 ? 'idle' : 'submitted')
+    } else {
+      setMessage('Something went wrong. Please try again later.')
+      setSubmitStatus('idle')
+    }
+  }
+
+  return (
+    <div className="columns is-mobile is-centered">
+      <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-third-fullhd">
+        <div className="is-size-5-desktop is-size-5-tablet is-size-6-mobile mt-5">
+          <form onSubmit={handleSubmit}>
+            <div className="field">
+              <div className="control has-icons-left mt-5">
+                <input className="input is-family-monospace"
+                       type="email"
+                       placeholder="Email"
+                       value={email}
+                       disabled={submitStatus !== 'idle'}
+                       onChange={e => setEmail(e.target.value)} />
+                <span className="icon is-small is-left">
+                  <FontAwesomeIcon icon={faEnvelope} />
+                </span>
+              </div>
+            </div>
+            {submitStatus !== 'submitted' && (
+              <div className="field has-text-centered">
+                <div className="control mt-5 mb-3">
+                  <button className={`button is-primary is-family-monospace ${submitStatus === 'submitting' ? 'is-loading' : ''}`} type="submit">
+                    Join us!
+                  </button>
+                </div>
+              </div>
+            )}
+          </form>
+          {message && (
+            <div className="is-size-6 has-text-success mt-3 mb-5">
+              <Typewriter key={message}
+                          words={[message]}
+                          wrapper={text => <div className="mt-5 ml-3">{text}</div>}
+                          completedText={() => {}} />
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+
 const IndexPage: React.FC<PageProps> = () => {
   const [completedTexts, setCompletedTexts] = useState<string[]>([])
 
@@ -114,23 +193,8 @@ const IndexPage: React.FC<PageProps> = () => {
           )}
         </div>
         {! currentText && (
-          <div className="has-text-success has-appear-effect">
-            <div className="columns is-mobile is-centered">
-              <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
-                <form className="has-text-centered">
-                  <div className="control has-icons-left has-icons-right mt-5">
-                    <input className="input" type="email" placeholder="Email" />
-                    <span className="icon is-small is-left">
-                      <FontAwesomeIcon icon={faEnvelope} />
-                    </span>
-                  </div>
-
-                  <div className="control my-5">
-                    <button className="button is-primary">Join us!</button>
-                  </div>
-                </form>
-              </div>
-            </div>
+          <div className="has-appear-effect">
+            <JoinForm />
           </div>
         )}
       </Layout>
