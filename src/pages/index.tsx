@@ -61,7 +61,7 @@ const baseTexts = [
     wrapper: (text: string) => (
       <div className="columns is-mobile is-centered mt-5 pt-5">
         <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-third-fullhd">
-          <div className="is-size-5-desktop is-size-5-tablet is-size-6-mobile mt-5">
+          <div className="has-text-centered is-size-5-desktop is-size-5-tablet is-size-6-mobile mt-5">
             <span className="has-text-weight-light">{text}</span>
             <Cursor cursorStyle="_" />
           </div>
@@ -85,7 +85,7 @@ const Typewriter: React.FC<{
   const [text] = useTypewriter({
     words:       words,
     loop:        1,
-    typeSpeed:   20,
+    typeSpeed:   35,
     deleteSpeed: 0,
     onLoopDone:  () => {
       setTimeout(() => completedText({text, wrapper, timeout}), timeout)
