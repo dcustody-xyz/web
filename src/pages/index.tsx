@@ -164,7 +164,7 @@ const JoinForm: React.FC = () => {
             )}
           </form>
           {message && (
-            <div className="is-size-6 has-text-success mt-3 mb-5">
+            <div className="is-size-6 has-text-centered has-text-success mt-3 mb-5">
               <Typewriter key={message}
                           words={[message]}
                           wrapper={text => <div className="mt-5 ml-3">{text}</div>}
