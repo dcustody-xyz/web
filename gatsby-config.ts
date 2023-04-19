@@ -8,7 +8,13 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        icon: 'src/images/logo.svg'
+        name:             'dCustody',
+        short_name:       'dCustody',
+        start_url:        '/',
+        background_color: '#000000',
+        theme_color:      '#000000',
+        display:          'standalone',
+        icon:             'src/images/logo.svg'
       }
     },
     // Important: this must be after the manifest plugin

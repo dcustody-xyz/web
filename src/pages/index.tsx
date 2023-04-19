@@ -216,5 +216,6 @@ export const Head: HeadFC = () => (
   <React.Fragment>
     <html lang="en" className="has-background-black has-text-light" />
     <title>dCustody</title>
+    <meta name="description" content="dCustody: Infrastructure for Trustless Digital Asset Custody" />
   </React.Fragment>
 )
