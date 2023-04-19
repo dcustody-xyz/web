@@ -216,6 +216,14 @@ export const Head: HeadFC = () => (
   <React.Fragment>
     <html lang="en" className="has-background-black has-text-light" />
     <title>dCustody</title>
+
     <meta name="description" content="dCustody: Infrastructure for Trustless Digital Asset Custody" />
+
+    <meta property="og:local" content="en_US" />
+    <meta property="og:title" content="dCustody" />
+    <meta property="og:description" content="dCustody: Infrastructure for Trustless Digital Asset Custody" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dcustody.xyz" />
+    <meta property="og:image" content="https://dcustody.xyz/icons/icon-512x512.png" />
   </React.Fragment>
 )
