@@ -21,8 +21,8 @@ const config: GatsbyConfig = {
     'gatsby-plugin-offline'
   ],
   siteMetadata: {
-    title:   `dCustody`,
-    siteUrl: `https://dcustody.xyz`
+    title:   'dCustody',
+    siteUrl: 'https://dcustody.xyz'
   }
 }
 
