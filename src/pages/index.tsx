@@ -56,7 +56,7 @@ const baseTexts = [
     )
   },
   {
-    text:    'Want to stop this?',
+    text:    'Join us to stop this',
     timeout: 500,
     wrapper: (text: string) => (
       <div className="columns is-mobile is-centered mt-5 pt-5">
@@ -154,12 +154,36 @@ const JoinForm: React.FC = () => {
               </div>
             </div>
             {submitStatus !== 'submitted' && (
-              <div className="field has-text-centered">
-                <div className="control mt-5 mb-3">
-                  <button className={`button is-primary is-family-monospace ${submitStatus === 'submitting' ? 'is-loading' : ''}`} type="submit">
-                    Join us!
-                  </button>
+              <div>
+                <div className="field has-text-centered">
+                  <div className="control mt-5 mb-3">
+                    <button className={`button is-primary is-family-monospace ${submitStatus === 'submitting' ? 'is-loading' : ''}`} type="submit">
+                      Join us!
+                    </button>
+                  </div>
                 </div>
+
+                <div className="mt-5 pt-4 has-text-centered has-text-success is-hidden-desktop">
+                  <a className="has-text-success"
+                     href="https://raw.githubusercontent.com/dcustody-xyz/papers/master/litepaper.pdf"
+                     target="_blank"
+                     rel="noopener noreferrer">
+                    Litepaper
+                  </a>
+                </div>
+
+                <nav className="navbar is-black is-fixed-bottom is-hidden-touch" role="navigation" aria-label="main navigation">
+                  <div className="navbar-menu">
+                    <div className="navbar-end">
+                      <a className="navbar-item has-text-success"
+                         href="https://raw.githubusercontent.com/dcustody-xyz/papers/master/litepaper.pdf"
+                         target="_blank"
+                         rel="noopener noreferrer">
+                        Litepaper
+                      </a>
+                    </div>
+                  </div>
+                </nav>
               </div>
             )}
           </form>
@@ -214,7 +238,7 @@ export default IndexPage
 
 export const Head: HeadFC = () => (
   <React.Fragment>
-    <html lang="en" className="has-background-black has-text-light" />
+    <html lang="en" className="has-background-black has-text-light has-navbar-fixed-bottom" />
     <title>dCustody</title>
 
     <meta name="description" content="dCustody: Infrastructure for Trustless Digital Asset Custody" />
