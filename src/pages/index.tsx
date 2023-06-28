@@ -99,6 +99,17 @@ const Typewriter: React.FC<{
   )
 }
 
+const LitepaperLink: React.FC<{
+  className: string
+}> = ({className, children}) => (
+  <a className={className}
+     href="https://raw.githubusercontent.com/dcustody-xyz/papers/master/litepaper.pdf"
+     target="_blank"
+     rel="noopener noreferrer">
+    {children}
+  </a>
+)
+
 const JoinForm: React.FC = () => {
   const apiEndpoint = 'https://email-api.dcustody.xyz/save'
 
@@ -164,23 +175,17 @@ const JoinForm: React.FC = () => {
                 </div>
 
                 <div className="mt-5 pt-4 has-text-centered has-text-success is-hidden-desktop">
-                  <a className="has-text-success"
-                     href="https://raw.githubusercontent.com/dcustody-xyz/papers/master/litepaper.pdf"
-                     target="_blank"
-                     rel="noopener noreferrer">
+                  <LitepaperLink className="has-text-success">
                     Litepaper
-                  </a>
+                  </LitepaperLink>
                 </div>
 
                 <nav className="navbar is-black is-fixed-bottom is-hidden-touch" role="navigation" aria-label="main navigation">
                   <div className="navbar-menu">
                     <div className="navbar-end">
-                      <a className="navbar-item has-text-success"
-                         href="https://raw.githubusercontent.com/dcustody-xyz/papers/master/litepaper.pdf"
-                         target="_blank"
-                         rel="noopener noreferrer">
+                      <LitepaperLink className="navbar-item has-text-success">
                         Litepaper
-                      </a>
+                      </LitepaperLink>
                     </div>
                   </div>
                 </nav>
