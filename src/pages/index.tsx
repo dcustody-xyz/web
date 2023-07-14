@@ -111,7 +111,7 @@ const LitepaperLink: React.FC<{
 )
 
 const JoinForm: React.FC = () => {
-  const apiEndpoint = 'https://email-api.dcustody.xyz/save'
+  const apiEndpoint = 'https://email-api.dcustody.xyz/dcustody/save'
 
   const [ email, setEmail ]               = useState<string>('')
   const [ message, setMessage ]           = useState<string>('')
